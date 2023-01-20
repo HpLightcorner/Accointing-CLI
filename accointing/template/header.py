@@ -11,7 +11,7 @@ HEADER = [
     "feeAsset (optional)",
     "classification (optional)",
     "operationId (optional)",
-    #"comments", Not yet supported by Accointing
+    "comments (optional)"
 ]
 
 
@@ -26,5 +26,5 @@ OVERRIDE = {
     "fee_asset": cattrs.gen.override(rename="feeAsset (optional)"),
     "classification": cattrs.gen.override(rename="classification (optional)"),
     "operation_id": cattrs.gen.override(rename="operationId (optional)"),
-    "comments": cattrs.gen.override(rename="comments", omit=True),
+    "comments": cattrs.gen.override(rename="comments (optional)"),
 }
