@@ -54,6 +54,15 @@ class TransactionType(str, Enum):
     DUST_CONVERSION_DEBITED = "dust_conversion_debited"
     DUST_CONVERSION_CREDITED = "dust_conversion_credited"
     CRYPTO_EARN_INTEREST_PAID = "crypto_earn_interest_paid"
+    CRYPTO_WALLET_SWAP_CREDITED = "crypto_wallet_swap_credited" # e.g. LUNA to LUNAC
+    CRYPTO_WALLET_SWAP_DEBITED = "crypto_wallet_swap_debited" # e.g. LUNA to LUNAC
+    REFERRAL_CARD_CASHBACK = "referral_card_cashback"
+    LOCKUP_LOCK = "lockup_lock" # e.g. CRO staking
+    ADMIN_WALLET_CREDITED = "admin_wallet_credited" # e.g. LUNA2 airdrop
+    CARD_TOP_UP = "card_top_up" # sell coins to top up card, taxable
+    CRYPTO_VIBAN_EXCHANGE = "crypto_viban_exchange" # sell coins for FIAT Wallet
+    RECURRING_BUY_ORDER = "recurring_buy_order"
+    LOCKUP_UNLOCK = "lockup_unlock"
 
 
 Mapper = namedtuple("Mapper", ["transaction", "classification"])
@@ -71,6 +80,15 @@ TRANSACTION = {
     TransactionType.CRYPTO_EARN_INTEREST_PAID: Mapper(
         Deposit, DepositClassification.INCOME
     ),
+    TransactionType.REFERRAL_CARD_CASHBACK: Mapper(Deposit, DepositClassification.INCOME),
+    TransactionType.ADMIN_WALLET_CREDITED: Mapper(Deposit, DepositClassification.AIRDROP),
+    TransactionType.CARD_TOP_UP: Mapper(Withdraw, WithdrawClassification.PAYMENT),
+    TransactionType.CRYPTO_WALLET_SWAP_CREDITED: Mapper(Deposit, DepositClassification.AIRDROP),
+    TransactionType.CRYPTO_WALLET_SWAP_DEBITED: Mapper(Withdraw, WithdrawClassification.LOST),
+    TransactionType.CRYPTO_VIBAN_EXCHANGE: Mapper(Order, UNSET),
+    TransactionType.LOCKUP_LOCK: Mapper(None, UNSET),
+    TransactionType.RECURRING_BUY_ORDER: Mapper(Order, UNSET),
+    TransactionType.LOCKUP_UNLOCK: Mapper(None, UNSET)
 }
 
 
